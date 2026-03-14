@@ -35,14 +35,14 @@ export class AboutComponent {
 
   protected readonly timeline = [
     {
-      year: '2024 - Present',
+      year: 'Nov 2025 - Present',
       title: 'Software Development Engineer',
       org: 'HashedIn by Deloitte',
       description: 'Working as Frontend Developer using Angular, building enterprise applications.',
     },
     {
-      year: '2024',
-      title: 'Intensive Training Program',
+      year: 'Jul 2025 - Sep 2025',
+      title: 'Software Development Intern',
       org: 'HashedIn by Deloitte',
       description: 'Completed 3 months of intensive training covering full-stack development.',
     },
