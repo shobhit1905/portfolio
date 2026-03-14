@@ -12,8 +12,8 @@ export class FooterComponent {
   protected readonly currentYear = new Date().getFullYear();
 
   protected readonly socialLinks = [
-    { label: 'GitHub', url: 'https://github.com/', icon: 'github' },
-    { label: 'LinkedIn', url: 'https://linkedin.com/in/', icon: 'linkedin' },
+    { label: 'GitHub', url: 'https://github.com/shobhit1905', icon: 'github' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/shobhit1905/', icon: 'linkedin' },
     { label: 'Email', url: 'mailto:shobhit@example.com', icon: 'email' },
   ];
 }
