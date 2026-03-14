@@ -7,8 +7,6 @@ interface Project {
   longDescription: string;
   technologies: string[];
   categories: string[];
-  githubUrl: string;
-  demoUrl: string;
   role: string;
 }
 
@@ -31,8 +29,6 @@ export class ProjectsComponent {
         'A Udemy-like platform with course management, instructor dashboard, student enrollments, authentication, REST APIs, and modular backend architecture.',
       technologies: ['Spring Boot', 'Angular', 'MySQL', 'JPA/Hibernate', 'REST APIs', 'Spring Security'],
       categories: ['Frontend', 'Backend'],
-      githubUrl: '#',
-      demoUrl: '#',
       role: 'Full Stack Developer',
     },
     {
@@ -42,8 +38,6 @@ export class ProjectsComponent {
         'A system where users upload a BRD and multiple AI agents collaborate to generate frontend code, backend code, and architecture. The final result is downloadable production-ready application code.',
       technologies: ['Python', 'Autogen', 'Generative AI', 'LLM Agents'],
       categories: ['AI'],
-      githubUrl: '#',
-      demoUrl: '#',
       role: 'AI Developer',
     },
     {
@@ -53,8 +47,6 @@ export class ProjectsComponent {
         'A platform that automates candidate evaluation, AI interview assistance, and structured candidate analysis. Solves the challenge campus ambassadors face organizing large-scale interviews.',
       technologies: ['Python', 'PostgreSQL', 'Autogen', 'Podman'],
       categories: ['AI', 'Backend'],
-      githubUrl: '#',
-      demoUrl: '#',
       role: 'Backend Developer',
     },
     {
@@ -64,8 +56,6 @@ export class ProjectsComponent {
         'Built Bronze, Silver, and Gold data layers using Medallion Architecture. Features scalable data processing and transformation pipelines with PySpark on Databricks.',
       technologies: ['Databricks', 'PySpark', 'Medallion Architecture', 'SQL'],
       categories: ['Data Engineering'],
-      githubUrl: '#',
-      demoUrl: '#',
       role: 'Data Engineer',
     },
   ];
