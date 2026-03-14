@@ -31,17 +31,19 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-family: inherit;
 }
 
 .filter-btn:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary-light);
+  border-color: #8b5cf6;
+  color: #a78bfa;
 }
 
 .filter-btn.active {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  border-color: #8b5cf6;
   color: white;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
 .projects-grid {
@@ -51,7 +53,7 @@
 }
 
 .project-card {
-  background: var(--color-surface-light);
+  background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 1rem;
   padding: 2rem;
@@ -62,8 +64,8 @@
 
 .project-card:hover {
   transform: translateY(-4px);
-  border-color: var(--color-primary);
-  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15);
+  border-color: #8b5cf6;
+  box-shadow: 0 8px 30px var(--color-glow);
 }
 
 .card-header {
@@ -74,7 +76,7 @@
 }
 
 .card-icon {
-  color: var(--color-primary-light);
+  color: #a78bfa;
 }
 
 .card-links {
@@ -88,19 +90,19 @@
 }
 
 .card-link:hover {
-  color: var(--color-primary-light);
+  color: #a78bfa;
 }
 
 .card-title {
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--color-text-primary);
+  color: var(--color-text);
   margin-bottom: 0.25rem;
 }
 
 .card-subtitle {
   font-size: 0.95rem;
-  color: var(--color-primary-light);
+  color: #a78bfa;
   font-weight: 500;
   margin-bottom: 1rem;
 }
@@ -120,7 +122,7 @@
 }
 
 .role-label {
-  color: var(--color-accent);
+  color: #22d3ee;
   font-weight: 600;
 }
 
@@ -132,8 +134,8 @@
 
 .tag {
   padding: 0.25rem 0.75rem;
-  background: rgba(99, 102, 241, 0.1);
-  color: var(--color-primary-light);
+  background: rgba(139, 92, 246, 0.12);
+  color: #a78bfa;
   border-radius: 9999px;
   font-size: 0.8rem;
   font-weight: 500;

@@ -33,7 +33,7 @@
 }
 
 .about-text strong {
-  color: var(--color-primary-light);
+  color: #a78bfa;
 }
 
 .career-timeline {
@@ -45,7 +45,7 @@
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: var(--color-text-primary);
+  color: var(--color-text);
 }
 
 .timeline-item {
@@ -60,14 +60,14 @@
   top: 0.5rem;
   width: 12px;
   height: 12px;
-  background: var(--color-primary);
+  background: #8b5cf6;
   border-radius: 50%;
-  border: 2px solid var(--color-surface);
+  border: 3px solid var(--color-bg);
 }
 
 .timeline-year {
   font-size: 0.8rem;
-  color: var(--color-accent);
+  color: #22d3ee;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -76,13 +76,13 @@
 .timeline-role {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--color-text-primary);
+  color: var(--color-text);
   margin: 0.25rem 0;
 }
 
 .timeline-org {
   font-size: 0.9rem;
-  color: var(--color-primary-light);
+  color: #a78bfa;
   font-weight: 500;
 }
 
@@ -101,6 +101,7 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 2rem;
+  color: var(--color-text);
 }
 
 .tech-grid {
@@ -115,7 +116,7 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem 1.5rem;
-  background: var(--color-surface-light);
+  background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 0.75rem;
   transition: all 0.3s ease;
@@ -123,20 +124,20 @@
 }
 
 .tech-chip:hover {
-  border-color: var(--color-primary);
+  border-color: #8b5cf6;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 4px 15px var(--color-glow);
 }
 
 .tech-name {
   font-weight: 600;
   font-size: 0.95rem;
-  color: var(--color-text-primary);
+  color: var(--color-text);
 }
 
 .tech-category {
   font-size: 0.75rem;
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
   margin-top: 0.25rem;
 }
 
