@@ -23,14 +23,14 @@ export class ContactComponent {
     {
       icon: 'linkedin',
       label: 'LinkedIn',
-      value: 'linkedin.com/in/shobhit',
-      href: 'https://linkedin.com/in/',
+      value: 'linkedin.com/in/shobhit1905',
+      href: 'https://www.linkedin.com/in/shobhit1905/',
     },
     {
       icon: 'github',
       label: 'GitHub',
-      value: 'github.com/shobhit',
-      href: 'https://github.com/',
+      value: 'github.com/shobhit1905',
+      href: 'https://github.com/shobhit1905',
     },
   ];
 
