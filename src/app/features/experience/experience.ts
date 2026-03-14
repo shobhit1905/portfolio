@@ -21,7 +21,7 @@ export class ExperienceComponent {
     {
       title: 'Software Development Engineer',
       company: 'HashedIn by Deloitte',
-      period: '2024 - Present',
+      period: 'Nov 2025 - Present',
       type: 'Full-time',
       highlights: [
         'Building enterprise-grade frontend applications using Angular',
@@ -32,10 +32,10 @@ export class ExperienceComponent {
       ],
     },
     {
-      title: 'Training Program',
+      title: 'Software Development Intern',
       company: 'HashedIn by Deloitte',
-      period: '2024',
-      type: 'Training',
+      period: 'Jul 2025 - Sep 2025',
+      type: 'Internship',
       highlights: [
         'Completed 3 months of intensive full-stack development training',
         'Covered Angular, Spring Boot, databases, and cloud technologies',
