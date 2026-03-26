@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* ===== CSS Custom Property for animated border ===== */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 /* ===== Dark Theme (Default) ===== */
 :root {
   --color-primary: #8b5cf6;
@@ -18,7 +25,7 @@
   --color-border-hover: #8b5cf6;
   --color-glow: rgba(139, 92, 246, 0.25);
   --nav-bg: rgba(10, 10, 26, 0.92);
-  --glass-bg: rgba(22, 22, 58, 0.7);
+  --glass-bg: rgba(22, 22, 58, 0.75);
 }
 
 /* ===== Light Theme ===== */
@@ -84,6 +91,8 @@ body.light-theme {
   }
 
   .btn-primary {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -100,9 +109,25 @@ body.light-theme {
     box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
   }
 
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    transform: skewX(-15deg);
+    transition: left 0.5s ease;
+  }
+
   .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+  }
+
+  .btn-primary:hover::after {
+    left: 150%;
   }
 
   .btn-outline {
@@ -122,9 +147,11 @@ body.light-theme {
   }
 
   .btn-outline:hover {
-    background: rgba(139, 92, 246, 0.1);
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: white;
+    border-color: transparent;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
   }
 
   .section-title {
@@ -156,5 +183,57 @@ body.light-theme {
     transform: translateY(-4px);
     border-color: var(--color-border-hover);
     box-shadow: 0 8px 30px var(--color-glow);
+  }
+
+  /* ===== Skeleton shimmer ===== */
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-card) 25%,
+      var(--color-bg-card-hover) 50%,
+      var(--color-bg-card) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.5rem;
+  }
+}
+
+/* ===== View Transitions ===== */
+@keyframes slide-out-left {
+  from { opacity: 1; transform: translateX(0) scale(1); }
+  to   { opacity: 0; transform: translateX(-24px) scale(0.98); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+::view-transition-old(root) {
+  animation: slide-out-left 200ms ease-in;
+}
+
+::view-transition-new(root) {
+  animation: slide-in-right 220ms ease-out;
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }

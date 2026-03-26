@@ -5,32 +5,70 @@
       <p class="section-subtitle">My professional journey and career milestones.</p>
     </div>
 
-    <div class="timeline">
-      @for (exp of experiences; track exp.period; let i = $index) {
-        <div class="timeline-item" [class.right]="i % 2 !== 0" appScrollReveal>
-          <div class="timeline-connector">
-            <div class="timeline-dot"></div>
-            <div class="timeline-line"></div>
-          </div>
-
-          <div class="timeline-card">
-            <div class="card-header">
-              <span class="card-period">{{ exp.period }}</span>
-              <span class="card-type">{{ exp.type }}</span>
-            </div>
-            <h3 class="card-title">{{ exp.title }}</h3>
-            <p class="card-company">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
-              {{ exp.company }}
-            </p>
-            <ul class="card-highlights">
-              @for (highlight of exp.highlights; track highlight) {
-                <li>{{ highlight }}</li>
+    @if (experiences().length) {
+      <div class="timeline">
+        @for (exp of experiences(); track exp.id; let last = $last) {
+          <div class="timeline-item" appScrollReveal>
+            <div class="timeline-connector">
+              <div class="timeline-dot" [class.current]="exp.current">
+                @if (exp.current) {
+                  <div class="dot-ring"></div>
+                }
+              </div>
+              @if (!last) {
+                <div class="timeline-line"></div>
               }
-            </ul>
+            </div>
+
+            <div class="timeline-card">
+              <div class="card-header">
+                <div class="company-avatar" [attr.aria-label]="exp.company">
+                  {{ getInitials(exp.company) }}
+                </div>
+                <div class="card-meta">
+                  <span class="card-period">{{ exp.period }}</span>
+                  <span class="card-type">{{ exp.type }}</span>
+                </div>
+              </div>
+
+              <h3 class="card-title">{{ exp.title }}</h3>
+              <p class="card-company">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+                {{ exp.company }}
+                <span class="card-location">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  {{ exp.location }}
+                </span>
+              </p>
+
+              <ul class="card-highlights">
+                @for (highlight of exp.highlights; track highlight) {
+                  <li class="highlight-chip">{{ highlight }}</li>
+                }
+              </ul>
+            </div>
           </div>
-        </div>
-      }
-    </div>
+        }
+      </div>
+    } @else {
+      <!-- Skeleton -->
+      <div class="timeline">
+        @for (n of [1, 2]; track n) {
+          <div class="timeline-item">
+            <div class="timeline-connector">
+              <div class="sk-dot skeleton"></div>
+              <div class="skeleton sk-line"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton sk-header"></div>
+              <div class="skeleton sk-title"></div>
+              @for (m of [1, 2, 3]; track m) {
+                <div class="skeleton sk-text"></div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
   </div>
 </section>

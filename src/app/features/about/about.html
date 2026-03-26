@@ -5,52 +5,79 @@
       <p class="section-subtitle">A brief introduction to who I am and what I do.</p>
     </div>
 
-    <div class="about-grid">
-      <div class="about-text" appScrollReveal>
-        <p>
-          I'm a Software Development Engineer at <strong>HashedIn by Deloitte</strong>, passionate about
-          crafting efficient, scalable, and user-centric digital solutions. With a solid foundation in
-          full-stack development, I specialize in building modern web applications using
-          <strong>Angular</strong> on the frontend and <strong>Spring Boot</strong> on the backend.
-        </p>
-        <p>
-          My journey in tech has also led me to explore the exciting world of
-          <strong>Generative AI</strong> and <strong>multi-agent systems</strong>, where I've built
-          innovative solutions that leverage AI to automate complex workflows. I'm also experienced
-          with <strong>data engineering</strong> pipelines using Databricks and the Medallion Architecture.
-        </p>
-        <p>
-          I believe in writing clean, maintainable code and constantly pushing the boundaries of
-          what's possible with technology.
-        </p>
-      </div>
-
-      <div class="career-timeline" appScrollReveal>
-        <h3 class="timeline-title">Career Timeline</h3>
-        @for (item of timeline; track item.year) {
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <span class="timeline-year">{{ item.year }}</span>
-              <h4 class="timeline-role">{{ item.title }}</h4>
-              <span class="timeline-org">{{ item.org }}</span>
-              <p class="timeline-desc">{{ item.description }}</p>
+    @if (about(); as d) {
+      <div class="about-grid">
+        <!-- Profile avatar + text -->
+        <div class="about-left" appScrollReveal>
+          <div class="profile-avatar">
+            <div class="avatar-ring"></div>
+            <div class="avatar-inner">
+              <span class="avatar-initials">SN</span>
             </div>
           </div>
-        }
-      </div>
-    </div>
 
-    <div class="tech-section" appScrollReveal>
-      <h3 class="tech-title">Technologies I Work With</h3>
-      <div class="tech-grid">
-        @for (tech of techStack; track tech.name) {
-          <div class="tech-chip">
-            <span class="tech-name">{{ tech.name }}</span>
-            <span class="tech-category">{{ tech.category }}</span>
+          <div class="about-text">
+            @for (para of d.paragraphs; track $index) {
+              <p>{{ para }}</p>
+            }
           </div>
-        }
+        </div>
+
+        <!-- Career timeline -->
+        <div class="career-timeline" appScrollReveal>
+          <h3 class="timeline-title">Career Timeline</h3>
+          <div class="timeline-track">
+            @for (item of d.timeline; track item.id; let last = $last) {
+              <div class="timeline-item">
+                <div class="timeline-connector">
+                  <div class="timeline-dot" [class.active]="$first"></div>
+                  @if (!last) {
+                    <div class="timeline-line-seg"></div>
+                  }
+                </div>
+                <div class="timeline-content">
+                  <span class="timeline-year">{{ item.year }}</span>
+                  <h4 class="timeline-role">{{ item.title }}</h4>
+                  <span class="timeline-org">{{ item.org }}</span>
+                  <p class="timeline-desc">{{ item.description }}</p>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
       </div>
-    </div>
+
+      <!-- Tech stack -->
+      <div class="tech-section" appScrollReveal>
+        <h3 class="tech-title">Technologies I Work With</h3>
+
+        <div class="tech-filter-bar">
+          @for (cat of categories(); track cat) {
+            <button
+              class="tech-filter-btn"
+              [class.active]="activeCategory() === cat"
+              (click)="activeCategory.set(cat)"
+            >
+              {{ cat }}
+            </button>
+          }
+        </div>
+
+        <div class="tech-grid">
+          @for (tech of filteredTech(); track tech.name) {
+            <div class="tech-chip" [class]="getCategoryClass(tech.category)">
+              <span class="tech-name">{{ tech.name }}</span>
+              <span class="tech-category">{{ tech.category }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    } @else {
+      <!-- Skeleton -->
+      <div class="about-grid">
+        <div class="skeleton-block skeleton"></div>
+        <div class="skeleton-block skeleton"></div>
+      </div>
+    }
   </div>
 </section>

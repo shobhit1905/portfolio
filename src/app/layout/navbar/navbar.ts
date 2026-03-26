@@ -13,6 +13,7 @@ export class NavbarComponent {
   protected readonly theme = inject(ThemeService);
   protected readonly isScrolled = signal(false);
   protected readonly isMobileMenuOpen = signal(false);
+  protected readonly scrollProgress = signal(0);
 
   protected readonly navLinks = [
     { path: '/', label: 'Home' },
@@ -26,14 +27,18 @@ export class NavbarComponent {
   @HostListener('window:scroll')
   onScroll(): void {
     this.isScrolled.set(window.scrollY > 50);
+    const total = document.body.scrollHeight - window.innerHeight;
+    this.scrollProgress.set(total > 0 ? (window.scrollY / total) * 100 : 0);
   }
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen.update((v) => !v);
+    document.body.style.overflow = this.isMobileMenuOpen() ? 'hidden' : '';
   }
 
   closeMobileMenu(): void {
     this.isMobileMenuOpen.set(false);
+    document.body.style.overflow = '';
   }
 
   toggleTheme(): void {
