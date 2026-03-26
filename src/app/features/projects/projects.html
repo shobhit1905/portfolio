@@ -6,42 +6,125 @@
     </div>
 
     <div class="filter-bar" appScrollReveal>
-      @for (filter of filters; track filter) {
+      <div class="filter-indicator" [style.left.px]="indicatorLeft" [style.width.px]="indicatorWidth"></div>
+      @for (filter of filters; track filter; let i = $index) {
         <button
+          #filterBtn
           class="filter-btn"
           [class.active]="activeFilter() === filter"
-          (click)="setFilter(filter)"
+          (click)="setFilter(filter, i)"
         >
           {{ filter }}
         </button>
       }
     </div>
 
-    <div class="projects-grid">
-      @for (project of filteredProjects(); track project.title) {
-        <div class="project-card" appScrollReveal>
-          <div class="card-header">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+    @if (projects().length) {
+      <div class="projects-grid">
+        @for (project of filteredProjects(); track project.id) {
+          <div class="project-card" appScrollReveal (click)="openModal(project)" role="button" tabindex="0" (keydown.enter)="openModal(project)" [attr.aria-label]="'View details for ' + project.title">
+            @if (project.featured) {
+              <div class="featured-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Featured
+              </div>
+            }
+
+            <div class="card-header">
+              <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="card-categories">
+                @for (cat of project.categories; track cat) {
+                  <span class="cat-badge" [class]="getCategoryClass(cat)">{{ cat }}</span>
+                }
+              </div>
             </div>
-            <span class="card-badge">Company Project</span>
+
+            <h3 class="card-title">{{ project.title }}</h3>
+            <p class="card-subtitle">{{ project.subtitle }}</p>
+            <p class="card-description">{{ project.description }}</p>
+
+            <div class="card-role">
+              <span class="role-label">Role:</span> {{ project.role }}
+            </div>
+
+            <div class="card-tags">
+              @for (tech of project.technologies; track tech) {
+                <span class="tag">{{ tech }}</span>
+              }
+            </div>
+
+            <div class="card-cta">
+              <span>View Details</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
           </div>
-
-          <h3 class="card-title">{{ project.title }}</h3>
-          <p class="card-subtitle">{{ project.description }}</p>
-          <p class="card-description">{{ project.longDescription }}</p>
-
-          <div class="card-role">
-            <span class="role-label">Role:</span> {{ project.role }}
+        }
+      </div>
+    } @else {
+      <div class="projects-grid">
+        @for (n of [1,2,3,4]; track n) {
+          <div class="skeleton-card">
+            <div class="skeleton sk-header"></div>
+            <div class="skeleton sk-title"></div>
+            <div class="skeleton sk-text"></div>
+            <div class="skeleton sk-text short"></div>
+            <div class="sk-tags">
+              <div class="skeleton sk-tag"></div>
+              <div class="skeleton sk-tag"></div>
+              <div class="skeleton sk-tag"></div>
+            </div>
           </div>
+        }
+      </div>
+    }
+  </div>
+</section>
 
-          <div class="card-tags">
-            @for (tech of project.technologies; track tech) {
-              <span class="tag">{{ tech }}</span>
+<!-- Project Detail Modal -->
+@if (selectedProject(); as project) {
+  <div class="modal-backdrop" (click)="closeModal()" role="dialog" aria-modal="true" [attr.aria-label]="project.title + ' details'">
+    <div class="modal-panel" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeModal()" aria-label="Close modal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="modal-title-group">
+          <h2 class="modal-title">{{ project.title }}</h2>
+          <p class="modal-subtitle">{{ project.subtitle }}</p>
+        </div>
+      </div>
+
+      <p class="modal-description">{{ project.longDescription }}</p>
+
+      <div class="modal-meta">
+        <div class="modal-meta-item">
+          <span class="meta-label">Role</span>
+          <span class="meta-value role-val">{{ project.role }}</span>
+        </div>
+        <div class="modal-meta-item">
+          <span class="meta-label">Categories</span>
+          <div class="meta-cats">
+            @for (cat of project.categories; track cat) {
+              <span class="cat-badge" [class]="getCategoryClass(cat)">{{ cat }}</span>
             }
           </div>
         </div>
-      }
+      </div>
+
+      <div class="modal-tech">
+        <span class="meta-label">Tech Stack</span>
+        <div class="modal-tags">
+          @for (tech of project.technologies; track tech) {
+            <span class="tag tag-large">{{ tech }}</span>
+          }
+        </div>
+      </div>
     </div>
   </div>
-</section>
+}

@@ -1,0 +1,380 @@
+{
+  "meta": {
+    "name": "Shobhit Nautiyal",
+    "initials": "SN",
+    "tagline": "Building scalable software, one commit at a time.",
+    "availableForWork": true,
+    "resumeUrl": "/assets/resume.pdf",
+    "email": "snautiyal2021@gmail.com",
+    "linkedin": "https://linkedin.com/in/shobhit1905",
+    "github": "https://github.com/shobhit1905",
+    "visitorCount": 1247,
+    "stats": [
+      {
+        "label": "Projects",
+        "value": "4+"
+      },
+      {
+        "label": "Technologies",
+        "value": "5+"
+      },
+      {
+        "label": "Current Role",
+        "value": "SDE @ HashedIn"
+      }
+    ],
+    "roles": [
+      "Software Development Engineer",
+      "Full Stack Developer",
+      "Angular Developer",
+      "AI Enthusiast"
+    ]
+  },
+  "about": {
+    "paragraphs": [
+      "I'm a Software Development Engineer at HashedIn by Deloitte, passionate about building scalable, high-performance applications that solve real-world problems.",
+      "My expertise spans the full stack — from crafting pixel-perfect Angular frontends to designing robust Spring Boot microservices and building AI-powered multi-agent systems.",
+      "I thrive at the intersection of clean code and great UX, with a growing focus on GenAI, data engineering, and cloud-native development."
+    ],
+    "timeline": [
+      {
+        "id": 1,
+        "year": "Nov 2025 – Present",
+        "title": "Software Development Engineer",
+        "org": "HashedIn by Deloitte",
+        "description": "Building enterprise Angular frontends and GenAI-powered platforms."
+      },
+      {
+        "id": 2,
+        "year": "Jul 2025 – Sep 2025",
+        "title": "Software Development Intern",
+        "org": "HashedIn by Deloitte",
+        "description": "Intensive full-stack training covering Angular, Spring Boot, databases, and cloud."
+      }
+    ],
+    "techStack": [
+      {
+        "name": "Angular",
+        "category": "Frontend"
+      },
+      {
+        "name": "TypeScript",
+        "category": "Frontend"
+      },
+      {
+        "name": "Java",
+        "category": "Language"
+      },
+      {
+        "name": "Python",
+        "category": "Language"
+      },
+      {
+        "name": "Spring Boot",
+        "category": "Backend"
+      },
+      {
+        "name": "PostgreSQL",
+        "category": "Database"
+      },
+      {
+        "name": "MySQL",
+        "category": "Database"
+      },
+      {
+        "name": "C++",
+        "category": "Language"
+      },
+      {
+        "name": "Docker",
+        "category": "DevOps"
+      },
+      {
+        "name": "Git",
+        "category": "Tool"
+      },
+      {
+        "name": "REST APIs",
+        "category": "Backend"
+      },
+      {
+        "name": "Databricks",
+        "category": "Data"
+      },
+      {
+        "name": "Generative AI",
+        "category": "AI/ML"
+      },
+      {
+        "name": "Autogen",
+        "category": "AI/ML"
+      },
+      {
+        "name": "Podman",
+        "category": "DevOps"
+      },
+      {
+        "name": "SQL",
+        "category": "Language"
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "1",
+      "title": "LearnSphere",
+      "subtitle": "Full Stack E-Learning Platform",
+      "description": "End-to-end LMS with course management, student tracking, and secure REST APIs.",
+      "longDescription": "A full-featured learning management system built with Angular and Spring Boot. Implements JWT-based auth, JPA/Hibernate ORM, and a responsive UI for course browsing, enrollment, and progress tracking.",
+      "technologies": [
+        "Spring Boot",
+        "Angular",
+        "MySQL",
+        "JPA/Hibernate",
+        "REST APIs",
+        "Spring Security"
+      ],
+      "categories": [
+        "Frontend",
+        "Backend"
+      ],
+      "role": "Full Stack Developer",
+      "featured": true,
+      "order": 1
+    },
+    {
+      "id": "2",
+      "title": "GenAI Multi-Agent Code Generator",
+      "subtitle": "AI-Powered Application Code Generator",
+      "description": "Multi-agent LLM system that generates production-ready application code from natural language specs.",
+      "longDescription": "Leverages Microsoft Autogen to orchestrate specialized LLM agents for requirements analysis, code generation, review, and documentation — producing structured, runnable codebases from plain-English inputs.",
+      "technologies": [
+        "Python",
+        "Autogen",
+        "Generative AI",
+        "LLM Agents"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "role": "AI Developer",
+      "featured": true,
+      "order": 2
+    },
+    {
+      "id": "3",
+      "title": "InterviewLens",
+      "subtitle": "GenAI Campus Interview Platform",
+      "description": "AI-driven interview simulation platform with real-time question generation and evaluation.",
+      "longDescription": "Backend-heavy platform using Python, PostgreSQL, and Autogen agents to simulate technical interviews, evaluate responses, and generate detailed feedback reports. Containerized with Podman.",
+      "technologies": [
+        "Python",
+        "PostgreSQL",
+        "Autogen",
+        "Podman"
+      ],
+      "categories": [
+        "AI",
+        "Backend"
+      ],
+      "role": "Backend Developer",
+      "featured": false,
+      "order": 3
+    },
+    {
+      "id": "4",
+      "title": "Databricks ETL Pipeline",
+      "subtitle": "Scalable Data Processing Pipeline",
+      "description": "Medallion-architecture ETL pipeline on Databricks for large-scale data transformation and analytics.",
+      "longDescription": "Implements Bronze → Silver → Gold medallion layers using PySpark on Databricks. Handles schema evolution, data quality checks, incremental loads, and delivers analytics-ready datasets for BI consumption.",
+      "technologies": [
+        "Databricks",
+        "PySpark",
+        "Medallion Architecture",
+        "SQL"
+      ],
+      "categories": [
+        "Data Engineering"
+      ],
+      "role": "Data Engineer",
+      "featured": false,
+      "order": 4
+    }
+  ],
+  "skills": [
+    {
+      "id": "1",
+      "category": "Frontend",
+      "icon": "layout",
+      "skills": [
+        {
+          "name": "Angular",
+          "level": 90
+        },
+        {
+          "name": "TypeScript",
+          "level": 85
+        },
+        {
+          "name": "HTML/CSS",
+          "level": 90
+        },
+        {
+          "name": "TailwindCSS",
+          "level": 80
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "category": "Backend",
+      "icon": "server",
+      "skills": [
+        {
+          "name": "Spring Boot",
+          "level": 85
+        },
+        {
+          "name": "Java",
+          "level": 85
+        },
+        {
+          "name": "REST APIs",
+          "level": 90
+        },
+        {
+          "name": "JPA/Hibernate",
+          "level": 80
+        },
+        {
+          "name": "Spring Security",
+          "level": 75
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "category": "AI / ML",
+      "icon": "brain",
+      "skills": [
+        {
+          "name": "Python",
+          "level": 80
+        },
+        {
+          "name": "Generative AI",
+          "level": 75
+        },
+        {
+          "name": "Autogen",
+          "level": 75
+        },
+        {
+          "name": "LLM Agents",
+          "level": 70
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "category": "Data Engineering",
+      "icon": "database",
+      "skills": [
+        {
+          "name": "PostgreSQL",
+          "level": 80
+        },
+        {
+          "name": "MySQL",
+          "level": 85
+        },
+        {
+          "name": "Databricks",
+          "level": 70
+        },
+        {
+          "name": "PySpark",
+          "level": 65
+        },
+        {
+          "name": "ETL Pipelines",
+          "level": 70
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "category": "Tools & DevOps",
+      "icon": "tool",
+      "skills": [
+        {
+          "name": "Git",
+          "level": 85
+        },
+        {
+          "name": "Docker/Podman",
+          "level": 70
+        },
+        {
+          "name": "VS Code",
+          "level": 90
+        },
+        {
+          "name": "IntelliJ",
+          "level": 80
+        },
+        {
+          "name": "Postman",
+          "level": 85
+        },
+        {
+          "name": "Maven",
+          "level": 75
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "1",
+      "period": "Nov 2025 – Present",
+      "type": "Full-time",
+      "title": "Software Development Engineer",
+      "company": "HashedIn by Deloitte",
+      "location": "Bengaluru, India",
+      "current": true,
+      "highlights": [
+        "Building enterprise-grade frontend applications using Angular with Signals-based state management",
+        "Developing responsive, accessible UI component libraries consumed across multiple product teams",
+        "Collaborating with cross-functional teams on REST API design and Spring Boot microservices",
+        "Contributing to GenAI-powered platforms and multi-agent AI systems using Autogen"
+      ]
+    },
+    {
+      "id": "2",
+      "period": "Jul 2025 – Sep 2025",
+      "type": "Internship",
+      "title": "Software Development Intern",
+      "company": "HashedIn by Deloitte",
+      "location": "Bengaluru, India",
+      "current": false,
+      "highlights": [
+        "Completed 3-month intensive full-stack development program",
+        "Built end-to-end projects spanning Angular, Spring Boot, PostgreSQL, and Docker",
+        "Gained hands-on enterprise development experience including CI/CD, code reviews, and Agile sprints",
+        "Delivered LearnSphere LMS as a capstone project"
+      ]
+    }
+  ],
+  "messages": [
+    {
+      "name": "Shobhit Nautiyal",
+      "email": "shobhit132623@gmail.com",
+      "message": "Hello Shobhit",
+      "sentAt": "2026-03-26T16:30:33.080Z",
+      "read": false,
+      "id": "zRLhK4fIQOk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

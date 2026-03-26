@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  AfterViewInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
-
-interface Skill {
-  name: string;
-  level: number;
-}
-
-interface SkillCategory {
-  title: string;
-  icon: string;
-  skills: Skill[];
-}
+import { PortfolioService } from '../../core/services/portfolio.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { SkillCategory } from '../../core/models/portfolio.models';
 
 @Component({
   selector: 'app-skills',
@@ -19,61 +19,83 @@ interface SkillCategory {
   templateUrl: './skills.html',
   styleUrl: './skills.css',
 })
-export class SkillsComponent {
-  protected readonly categories: SkillCategory[] = [
-    {
-      title: 'Frontend',
-      icon: 'layout',
-      skills: [
-        { name: 'Angular', level: 90 },
-        { name: 'TypeScript', level: 85 },
-        { name: 'HTML/CSS', level: 90 },
-        { name: 'TailwindCSS', level: 80 },
-      ],
-    },
-    {
-      title: 'Backend',
-      icon: 'server',
-      skills: [
-        { name: 'Spring Boot', level: 85 },
-        { name: 'Java', level: 85 },
-        { name: 'REST APIs', level: 90 },
-        { name: 'JPA/Hibernate', level: 80 },
-        { name: 'Spring Security', level: 75 },
-      ],
-    },
-    {
-      title: 'AI / ML',
-      icon: 'brain',
-      skills: [
-        { name: 'Python', level: 80 },
-        { name: 'Generative AI', level: 75 },
-        { name: 'Autogen', level: 75 },
-        { name: 'LLM Agents', level: 70 },
-      ],
-    },
-    {
-      title: 'Data Engineering',
-      icon: 'database',
-      skills: [
-        { name: 'PostgreSQL', level: 80 },
-        { name: 'MySQL', level: 85 },
-        { name: 'Databricks', level: 70 },
-        { name: 'PySpark', level: 65 },
-        { name: 'ETL Pipelines', level: 70 },
-      ],
-    },
-    {
-      title: 'Tools & DevOps',
-      icon: 'tool',
-      skills: [
-        { name: 'Git', level: 85 },
-        { name: 'Docker/Podman', level: 70 },
-        { name: 'VS Code', level: 90 },
-        { name: 'IntelliJ', level: 80 },
-        { name: 'Postman', level: 85 },
-        { name: 'Maven', level: 75 },
-      ],
-    },
-  ];
+export class SkillsComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('ringsSection') ringsSection!: ElementRef<HTMLDivElement>;
+
+  private readonly portfolioService = inject(PortfolioService);
+  protected readonly categories = toSignal(this.portfolioService.getSkills(), {
+    initialValue: [] as SkillCategory[],
+  });
+  protected readonly ringsVisible = signal(false);
+
+  readonly circumference = 2 * Math.PI * 36; // ≈ 226.2
+
+  private ringsObserver!: IntersectionObserver;
+  private barsObserver!: IntersectionObserver;
+
+  ngAfterViewInit(): void {
+    this.setupRingsObserver();
+    this.setupBarsObserver();
+  }
+
+  ngOnDestroy(): void {
+    this.ringsObserver?.disconnect();
+    this.barsObserver?.disconnect();
+  }
+
+  private setupRingsObserver(): void {
+    this.ringsObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          this.ringsVisible.set(true);
+          this.ringsObserver.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (this.ringsSection?.nativeElement) {
+      this.ringsObserver.observe(this.ringsSection.nativeElement);
+    }
+  }
+
+  private setupBarsObserver(): void {
+    this.barsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const card = entry.target as HTMLElement;
+            const bars = card.querySelectorAll<HTMLElement>('.skill-progress');
+            bars.forEach((bar, idx) => {
+              const level = bar.getAttribute('data-level') ?? '0';
+              setTimeout(() => {
+                bar.style.width = level + '%';
+              }, idx * 80);
+            });
+            this.barsObserver.unobserve(card);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+  }
+
+  onCardVisible(el: HTMLElement): void {
+    this.barsObserver.observe(el);
+  }
+
+  getAvgLevel(cat: SkillCategory): number {
+    if (!cat.skills.length) return 0;
+    return Math.round(cat.skills.reduce((s, k) => s + k.level, 0) / cat.skills.length);
+  }
+
+  getSkillLabel(level: number): string {
+    if (level >= 85) return 'Expert';
+    if (level >= 75) return 'Advanced';
+    if (level >= 60) return 'Proficient';
+    return 'Familiar';
+  }
+
+  getRingOffset(level: number): number {
+    return this.circumference * (1 - level / 100);
+  }
 }
