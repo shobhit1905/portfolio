@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
-
-interface TechItem {
-  name: string;
-  category: string;
-}
+import { PortfolioService } from '../../core/services/portfolio.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { About } from '../../core/models/portfolio.models';
 
 @Component({
   selector: 'app-about',
@@ -14,37 +12,36 @@ interface TechItem {
   styleUrl: './about.css',
 })
 export class AboutComponent {
-  protected readonly techStack: TechItem[] = [
-    { name: 'Angular', category: 'Frontend' },
-    { name: 'TypeScript', category: 'Language' },
-    { name: 'Java', category: 'Language' },
-    { name: 'Python', category: 'Language' },
-    { name: 'Spring Boot', category: 'Backend' },
-    { name: 'PostgreSQL', category: 'Database' },
-    { name: 'MySQL', category: 'Database' },
-    { name: 'C++', category: 'Language' },
-    { name: 'Docker', category: 'DevOps' },
-    { name: 'Git', category: 'Tool' },
-    { name: 'REST APIs', category: 'Backend' },
-    { name: 'Databricks', category: 'Data' },
-    { name: 'Generative AI', category: 'AI/ML' },
-    { name: 'Autogen', category: 'AI/ML' },
-    { name: 'Podman', category: 'DevOps' },
-    { name: 'SQL', category: 'Language' },
-  ];
+  private readonly portfolioService = inject(PortfolioService);
+  protected readonly about = toSignal<About | null>(this.portfolioService.getAbout(), {
+    initialValue: null,
+  });
 
-  protected readonly timeline = [
-    {
-      year: 'Nov 2025 - Present',
-      title: 'Software Development Engineer',
-      org: 'HashedIn by Deloitte',
-      description: 'Working as Frontend Developer using Angular, building enterprise applications.',
-    },
-    {
-      year: 'Jul 2025 - Sep 2025',
-      title: 'Software Development Intern',
-      org: 'HashedIn by Deloitte',
-      description: 'Completed 3 months of intensive training covering full-stack development.',
-    },
-  ];
+  protected readonly activeCategory = signal('All');
+
+  protected readonly categories = computed(() => {
+    const stack = this.about()?.techStack ?? [];
+    return ['All', ...new Set(stack.map((t) => t.category))];
+  });
+
+  protected readonly filteredTech = computed(() => {
+    const stack = this.about()?.techStack ?? [];
+    const cat = this.activeCategory();
+    return cat === 'All' ? stack : stack.filter((t) => t.category === cat);
+  });
+
+  readonly categoryColors: Record<string, string> = {
+    Frontend: 'cat-frontend',
+    Backend: 'cat-backend',
+    Language: 'cat-language',
+    Database: 'cat-database',
+    DevOps: 'cat-devops',
+    Data: 'cat-data',
+    'AI/ML': 'cat-ai',
+    Tool: 'cat-tool',
+  };
+
+  getCategoryClass(category: string): string {
+    return this.categoryColors[category] ?? 'cat-default';
+  }
 }

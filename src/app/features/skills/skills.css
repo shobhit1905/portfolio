@@ -13,9 +13,70 @@
   margin-bottom: 4rem;
 }
 
+/* ===== Radial rings ===== */
+.rings-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  padding: 2rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+}
+
+.ring-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ring-svg {
+  overflow: visible;
+}
+
+.ring-bg {
+  stroke: var(--color-border);
+}
+
+.ring-progress {
+  stroke: url(#ring-gradient);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+/* Inline gradient def — we define it in the SVG */
+.ring-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.ring-value {
+  font-size: 1rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #a78bfa, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-variant-numeric: tabular-nums;
+}
+
+.ring-name {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  text-align: center;
+  max-width: 80px;
+}
+
+/* ===== Skills grid ===== */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 1.5rem;
 }
 
@@ -36,7 +97,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .card-icon {
@@ -50,7 +111,7 @@
 }
 
 .card-title {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--color-text);
 }
@@ -58,13 +119,13 @@
 .skills-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.1rem;
 }
 
 .skill-item {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
 
 .skill-info {
@@ -74,15 +135,33 @@
 }
 
 .skill-name {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
   color: var(--color-text);
+}
+
+.skill-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skill-label {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(139, 92, 246, 0.12);
+  color: #a78bfa;
+  font-weight: 600;
 }
 
 .skill-percent {
   font-size: 0.8rem;
   color: var(--color-text-muted);
   font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  min-width: 34px;
+  text-align: right;
 }
 
 .skill-bar {
@@ -90,14 +169,30 @@
   background: var(--color-border);
   border-radius: 3px;
   overflow: hidden;
+  cursor: default;
 }
 
 .skill-progress {
   height: 100%;
   background: linear-gradient(90deg, #8b5cf6, #06b6d4);
   border-radius: 3px;
-  transition: width 1s ease-out;
+  width: 0;
+  transition: width 0.85s ease-out;
 }
+
+/* ===== Skeleton ===== */
+.skeleton-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sk-head { height: 28px; width: 50%; }
+.sk-bar { height: 10px; width: 100%; border-radius: 5px; }
 
 @media (max-width: 768px) {
   .skills-grid {
@@ -106,5 +201,10 @@
 
   .skills-section {
     padding: 6rem 1.5rem 4rem;
+  }
+
+  .rings-section {
+    gap: 1.25rem;
+    padding: 1.25rem;
   }
 }

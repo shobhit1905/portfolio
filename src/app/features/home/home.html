@@ -1,61 +1,66 @@
 <section class="hero">
+  <canvas class="particle-canvas" #particleCanvas></canvas>
+
   <div class="hero-bg">
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
     <div class="hero-glow-2"></div>
   </div>
 
-  <div class="hero-content">
-    <div class="hero-badge" appScrollReveal>
-      <span class="badge-dot"></span>
-      Available for opportunities
-    </div>
-
-    <h1 class="hero-title" appScrollReveal>
-      Hi, I'm
-      <span class="hero-name">Shobhit Nautiyal</span>
-    </h1>
-
-    <div class="hero-role" appScrollReveal>
-      <span class="role-prefix">I'm a </span>
-      <span class="role-text">{{ displayText }}</span>
-      <span class="cursor">|</span>
-    </div>
-
-    <p class="hero-description" appScrollReveal>
-      Software Development Engineer at HashedIn by Deloitte. Passionate about building scalable
-      applications with Angular, Spring Boot, and Generative AI.
-    </p>
-
-    <div class="hero-actions" appScrollReveal>
-      <a routerLink="/projects" class="btn-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        View Projects
-      </a>
-      <a href="/assets/resume.pdf" download class="btn-outline">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download Resume
-      </a>
-      <a routerLink="/contact" class="btn-outline">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Contact Me
-      </a>
-    </div>
-
-    <div class="hero-stats" appScrollReveal>
-      <div class="stat">
-        <span class="stat-value">4+</span>
-        <span class="stat-label">Projects</span>
+  <div class="hero-glass-card">
+    <div class="hero-content">
+      <div class="hero-badge" appScrollReveal>
+        <span class="badge-dot"></span>
+        <span class="badge-ripple"></span>
+        Available for opportunities
       </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-value">5+</span>
-        <span class="stat-label">Technologies</span>
+
+      <h1 class="hero-title" appScrollReveal>
+        Hi, I'm
+        <span class="hero-name">{{ meta()?.name ?? 'Shobhit Nautiyal' }}</span>
+      </h1>
+
+      <div class="hero-role" appScrollReveal>
+        <span class="role-prefix">I'm a </span>
+        <span class="role-text">{{ displayText }}</span>
+        <span class="cursor">|</span>
       </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-value">SDE</span>
-        <span class="stat-label">@ HashedIn</span>
+
+      <p class="hero-description" appScrollReveal>
+        Software Development Engineer at HashedIn by Deloitte. Passionate about building scalable
+        applications with Angular, Spring Boot, and Generative AI.
+      </p>
+
+      <div class="hero-actions" appScrollReveal>
+        <a routerLink="/projects" class="btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          View Projects
+        </a>
+        <a href="/assets/resume.pdf" download class="btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Resume
+        </a>
+        <a routerLink="/contact" class="btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact Me
+        </a>
+      </div>
+
+      <div class="hero-stats" appScrollReveal>
+        @for (stat of statCounters; track stat.label) {
+          <div class="stat">
+            <span class="stat-value">{{ stat.current }}{{ stat.suffix }}</span>
+            <span class="stat-label">{{ stat.label }}</span>
+          </div>
+          @if (!$last) {
+            <div class="stat-divider"></div>
+          }
+        }
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value stat-text">SDE</span>
+          <span class="stat-label">&#64; HashedIn</span>
+        </div>
       </div>
     </div>
   </div>
