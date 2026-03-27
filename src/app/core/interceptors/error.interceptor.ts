@@ -8,7 +8,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 0) {
-        toast.show('Could not connect to data server. Run: npm run server');
+        toast.show('Network error. Please check your connection and try again.');
       }
       return throwError(() => error);
     })
